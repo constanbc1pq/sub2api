@@ -23,6 +23,9 @@ ARG NPM_CONFIG_REGISTRY=
 FROM --platform=${BUILDPLATFORM} ${NODE_IMAGE} AS frontend-builder
 ARG NPM_CONFIG_REGISTRY
 
+# Node 24 fetch/Corepack must opt in to Docker's proxy environment variables.
+ENV NODE_USE_ENV_PROXY=1
+
 WORKDIR /app/frontend
 
 # Install pnpm (pinned to v9 to match CI and keep builds reproducible)
